@@ -1,1 +1,7 @@
-This is the uploader
+{% extends "docParser/base.html" %}
+<br>
+<br>
+{% block content %}
+    This is the uploader
+    {% csrf_token %}
+{% endblock %}
