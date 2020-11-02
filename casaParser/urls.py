@@ -20,5 +20,6 @@ import docParser.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", docParser.views.authPage)
+    path("", docParser.views.authPage),
+    path("cparser", docParser.views.cParser),
 ]
