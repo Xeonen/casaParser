@@ -1,7 +1,11 @@
 {% extends "docParser/base.html" %}
-<br>
-<br>
+
 {% block content %}
-    Current
-    {% csrf_token %}
+<h1>Login</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ error }}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
 {% endblock %}

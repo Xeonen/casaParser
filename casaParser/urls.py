@@ -20,6 +20,7 @@ import docParser.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", docParser.views.authPage),
-    path("cparser", docParser.views.cParser),
+    path("", docParser.views.authPage, name="auth"),
+    path("logout", docParser.views.logoutuser, name="ulogout"),
+    path("cparser", docParser.views.cParser, name="cparser"),
 ]
