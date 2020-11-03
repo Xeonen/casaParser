@@ -60,7 +60,7 @@ def cParser(request):
         ep = excelProcedure("media/source.xlsx", "media/dataset.xlsx", 1, 0.25)
         parsedData = ep.fillForm()
 
-        return(serve(request, "media/casaRapor.xlsx", "media/casaRapor.xlsx"))
+        return(serve(request, "media/casaRapor.xlsx", ""))
 
     else:
         rmtree("media")
