@@ -11,10 +11,24 @@
         <input type="file" name="reportData">Rapor Dosyası
         <br>
         <input type="file" name="sourceFile">Kaynak Dosya
-
+        <br>
+        <select name="payetSize">
+            <option value="0.50">0.50</option>
+            <option value="0.25" selected="selected">0.25</option>
+		</select> Payet Hacmi
 
         <br>
-        <button type="submit">Upload</button>
+        <select name="formType">
+            <option value="1">Cinsiyeti Belirli</option>
+            <option value="2" selected="selected">Cinsiyeti Belirsiz</option>
+            <option value="3">Koç ve Teke</option>
+            <option value="4">Manda</option>
+            <option value="5">Safkan Arap Atı</option>
+            <option value="6">Spor Atı</option>
+		</select> Form Tipi
+
+        <br>
+        <button type="submit">Yükle</button>
 
 
     </form>

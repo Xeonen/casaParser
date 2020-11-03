@@ -47,28 +47,33 @@ def logoutuser(request):
     return (redirect("auth"))
 
 def cParser(request):
+    try:
+        rmtree("media")
+    except:
+        pass
     fileDict = {"casaFiles": "data.zip", "reportData": "dataset.xlsx", "sourceFile": "source.xlsx"}
     if request.method == "POST":
+        try:
+            formType = int(request.POST["formType"])
+            payetSize = float(request.POST["payetSize"])
+        except Exception as e:
+            print(e)
+
 
         for file in request.FILES:
             uploadedFile = request.FILES[file]
             FileSystemStorage().save(fileDict[file], uploadedFile)
 
+
         with ZipFile("media/data.zip", "r") as zip:
             zip.extractall("media/data/")
 
-        ep = excelProcedure("media/source.xlsx", "media/dataset.xlsx", 1, 0.25)
+        ep = excelProcedure("media/source.xlsx", "media/dataset.xlsx", formType, payetSize)
         parsedData = ep.fillForm()
 
         return(serve(request, "media/casaRapor.xlsx", ""))
-
     else:
-        rmtree("media")
-
-
-
-
-    return (render(request, "docParser/cParser.html"))
+        return (render(request, "docParser/cParser.html"))
 
 # ep = excelProcedure("source.xlsx", "dataset.xlsx", 1, 0.25)
 # ep.fillForm()
