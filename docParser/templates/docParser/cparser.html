@@ -3,6 +3,20 @@
 {% block content %}
     <br>
     <br>
-    This is the uploader
-    {% csrf_token %}
+    <h2>Uploader</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="casaFiles">CASA Dosyası
+        <br>
+        <input type="file" name="reportData">Rapor Dosyası
+        <br>
+        <input type="file" name="sourceFile">Kaynak Dosya
+
+
+        <br>
+        <button type="submit">Upload</button>
+
+
+    </form>
+
 {% endblock %}

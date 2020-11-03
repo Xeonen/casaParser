@@ -5,7 +5,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import redirect
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import UploadFileForm
-
+from django.core.files.storage import FileSystemStorage
+from zipfile import ZipFile
 # Create your views here.
 
 
@@ -17,8 +18,6 @@ def authPage(request):
         else:
             print(f"User is {request.user.is_authenticated}")
             return (render(request, "docParser/auth.html", {"form": AuthenticationForm}))
-
-
     else:
         user = authenticate(
             request,
@@ -35,14 +34,21 @@ def authPage(request):
             login(request, user)
             return(redirect("cparser"))
 
-
-
 def logoutuser(request):
     if request.method == "POST":
         print("Logout Called")
         logout(request)
     return (redirect("auth"))
 
-
 def cParser(request):
+    fileDict = {"casaFiles": "data.zip", "reportData": "dataset.xlsx", "sourceFile": "source.xlsx"}
+    if request.method == "POST":
+
+        for file in request.FILES:
+            uploadedFile = request.FILES[file]
+            FileSystemStorage().save(fileDict[file], uploadedFile)
+
+        with ZipFile("media/data.zip", "r") as zip:
+            zip.extractall("media/data/")
+
     return (render(request, "docParser/cParser.html"))

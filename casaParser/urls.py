@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from django.conf import settings
+from django.conf.urls.static import static
 import docParser.views
 
 urlpatterns = [
@@ -24,3 +25,8 @@ urlpatterns = [
     path("logout", docParser.views.logoutuser, name="ulogout"),
     path("cparser", docParser.views.cParser, name="cparser"),
 ]
+
+
+# This is for the development, set DEBUG to FALSE on deployment.
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
