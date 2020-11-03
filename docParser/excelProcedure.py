@@ -18,7 +18,7 @@ from tqdm import tqdm
 
 class excelProcedure():
     
-    varDF = pd.read_csv("varData.csv", sep=";", encoding="UTF-8")
+    varDF = pd.read_csv("static/varData.csv", sep=";", encoding="UTF-8")
     trash = "A49"
     changeDF = pd.DataFrame(
         { "01": ["B31", "A38"],
@@ -40,7 +40,7 @@ class excelProcedure():
         self.wb = load_workbook(source)
         self.source = self.wb["sourceSheet"]
         self.df = pd.read_excel(dataset)  #, encoding="UTF-8")
-        self.fileList = glob("data/*.xls")
+        self.fileList = glob("media/data/*.xls")
         
         self.trash = excelProcedure.trash
         self.payetVol = payetVol
@@ -196,7 +196,7 @@ class excelProcedure():
             self.wb[sheetName][resultLoc].value = resultText
             self.wb[sheetName][self.trash].value = ""
             
-        self.wb.save("neoResult.xlsx")
+        self.wb.save("media/casaRapor.xlsx")
         self.wb.close()
 
             
@@ -220,8 +220,8 @@ class excelProcedure():
 
 
       
-ep = excelProcedure("source.xlsx", "dataset.xlsx", 1, 0.25)
-ep.fillForm()
+# ep = excelProcedure("source.xlsx", "dataset.xlsx", 1, 0.25)
+# ep.fillForm()
 
 
 

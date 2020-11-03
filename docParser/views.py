@@ -7,6 +7,12 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import UploadFileForm
 from django.core.files.storage import FileSystemStorage
 from zipfile import ZipFile
+from django.http import HttpResponse
+from django.views.static import serve
+from shutil import rmtree
+
+
+from .excelProcedure import excelProcedure
 # Create your views here.
 
 
@@ -51,4 +57,18 @@ def cParser(request):
         with ZipFile("media/data.zip", "r") as zip:
             zip.extractall("media/data/")
 
+        ep = excelProcedure("media/source.xlsx", "media/dataset.xlsx", 1, 0.25)
+        parsedData = ep.fillForm()
+
+        return(serve(request, "media/casaRapor.xlsx", "media/casaRapor.xlsx"))
+
+    else:
+        rmtree("media")
+
+
+
+
     return (render(request, "docParser/cParser.html"))
+
+# ep = excelProcedure("source.xlsx", "dataset.xlsx", 1, 0.25)
+# ep.fillForm()
