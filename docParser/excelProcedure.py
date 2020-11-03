@@ -122,7 +122,7 @@ class excelProcedure():
             sheetID = str(ID)
             sheetID = "0"*(3-len(sheetID))+sheetID
             for fID, file in enumerate(fileList):
-                file = file.split("\\")[-1]
+                file = file.split("/")[-1]
                 if file.startswith(sheetID):
                     fileName = fileList.pop(fID)
                     break
