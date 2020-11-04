@@ -24,7 +24,7 @@ class excelProcedure():
 1;B32;5;95;B33;40;99;A49;FALSE;FALSE;D19;1;5;A49;15;A49;15;D20;30
 2;D19;40;95;D20;50;99;D21;5;25;D22;5;15;A49;15;A49;15;D23;30
 3;D18;30;95;D20;50;99;D21;100;800;D22;40;150;D23;30;D24;20;D25;40
-4;D19;40;95;D20;50;99;D22;15;30;D23;15;25;D24;15;D25;20;D26;30
+4;D19;40;95;D21;50;99;D22;15;30;D23;15;25;D24;15;D25;20;D26;30
 5;D19;30;95;D21;50;99;D22;100;400;D23;50;100;D24;25;D25;20;D26;40
 6;D18;35;95;A49;FALSE;99;A49;FALSE;1000;A49;FALSE;1000;A49;100;A49;100;A49;100"""
 
@@ -33,10 +33,10 @@ class excelProcedure():
     changeDF = pd.DataFrame(
         { "01": ["B31", "A38"],
           "02": ["B35", "A42"],
-          "03": ["B36", "A38"],
-          "04": ["B37", "A38"],
-          "05": ["B37", "A39"],
-          "06": [trash, "D18"]        
+          "03": ["B36", "A43"],
+          "04": ["B37", "A44"],
+          "05": ["B37", "A44"],
+          "06": [trash, trash]
             }
         )
     
@@ -73,7 +73,7 @@ class excelProcedure():
         try:
             motilRaw = ws.cell_value(26, 23)
             motil = round(motilRaw)
-            dense =  self.parse_dense(ws.cell_value(14, 5))            
+            dense = self.parse_dense(ws.cell_value(14, 5))
             if motil > 50:
                 rnd = randint(1,9)
                 live = motil + rnd
