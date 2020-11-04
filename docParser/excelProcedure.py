@@ -91,7 +91,25 @@ class excelProcedure():
         casaDict["motil"] = int(round(motil, 0))
         casaDict["live"] = int(round(live, 0))
         casaDict["dense"] = int(round(dense, 0))
-        casaDict["number"] = int(round(dense*motil*self.payetVol*0.01))
+
+        for checkObj in self.checkList[:-1]:
+            checkObjCond = checkObj.lower() + "Cond"
+            checkObjCondMax = checkObjCond + "Max"
+            cond = self.varDF.loc[0, checkObjCond]
+            condMax = self.varDF.loc[0, checkObjCondMax]
+            val = casaDict[checkObj]
+
+            if cond != "FALSE":
+                cond = int(cond)
+                condMax = int(condMax)
+                if val > condMax:
+                    val = int(round(condMax * randint(90, 95) / 100, 0))
+                    casaDict[checkObj] = int(round(val, 0))
+
+
+
+
+        casaDict["number"] = int(round(casaDict["dense"]*casaDict["motil"]*self.payetVol*0.01, 0))
         
         return(casaDict)
     
