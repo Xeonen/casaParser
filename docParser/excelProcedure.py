@@ -96,13 +96,13 @@ class excelProcedure():
         return(casaDict)
     
     
-    def gen_disfunc(self, motil, minVal, headMax, otherMax, totalMax):
+    def gen_disfunc(self, motil, minVal, headMax, otherMax):
         multiplier = (randint(1, 100) + 2*minVal - motil)/(100+minVal)
 
         head = int(round(headMax*multiplier, 0))
         other = int(round(otherMax*multiplier, 0))
-        total = int(round(totalMax * multiplier, 0))
-        funcDict = {"head": head, "other": other, "total": total}
+
+        funcDict = {"head": head, "other": other, "total": head+other}
 
         return(funcDict)
     
@@ -187,10 +187,9 @@ class excelProcedure():
 
             headMax = int(self.varDF.loc[0, "headCond"])
             otherMax = int(self.varDF.loc[0, "otherCond"])
-            totalMax = int(self.varDF.loc[0, "totalCond"])
             minVal = int(self.varDF.loc[0, "motilCond"])
 
-            funcDict = self.gen_disfunc(motil, minVal, headMax, otherMax, totalMax)
+            funcDict = self.gen_disfunc(motil, minVal, headMax, otherMax)
             
             for key in funcDict.keys():
                 checkObjCond = key.lower() + "Cond"
