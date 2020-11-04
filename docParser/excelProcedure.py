@@ -163,7 +163,7 @@ class excelProcedure():
             live = casaDict['live']           
             number = casaDict['number']
 
-              
+
             for checkObj in self.checkList:
                 checkObjCond = checkObj.lower() + "Cond"
                 checkObjCondMax = checkObjCond+"Max"
