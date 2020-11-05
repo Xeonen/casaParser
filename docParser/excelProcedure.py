@@ -73,7 +73,7 @@ class excelProcedure():
         try:
             motilRaw = ws.cell_value(26, 23)
             motil = round(motilRaw)
-            dense = self.parse_dense(ws.cell_value(14, 5))
+            dense = self.parse_dense(ws.cell_value(14, 5))*self.payetVol
             if motil > 50:
                 rnd = randint(1,9)
                 live = motil + rnd
@@ -105,9 +105,6 @@ class excelProcedure():
                 if val > condMax:
                     val = int(round(condMax * randint(90, 95) / 100, 0))
                     casaDict[checkObj] = int(round(val, 0))
-
-
-
 
         casaDict["number"] = int(round(casaDict["dense"]*casaDict["motil"]*self.payetVol*0.01, 0))
         
@@ -182,7 +179,7 @@ class excelProcedure():
             number = casaDict['number']
 
 
-            for checkObj in self.checkList:
+            for checkObj in self.checkList[:-1]:
                 checkObjCond = checkObj.lower() + "Cond"
                 checkObjCondMax = checkObjCond+"Max"
                 cond = self.varDF.loc[0, checkObjCond]
