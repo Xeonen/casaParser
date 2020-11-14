@@ -68,7 +68,10 @@ class excelProcedure():
         
     def get_casa(self, fileName):
         casaDict = {"motil": 0, "live": 0, "dense": 0}
-        workbook  = xlrd.open_workbook(fileName)
+        try:
+            workbook  = xlrd.open_workbook(fileName)
+        except Exception as e:
+            print(e)
         ws = workbook.sheet_by_index(0)
         try:
             motilRaw = ws.cell_value(26, 23)
@@ -170,8 +173,12 @@ class excelProcedure():
                 self.wb[sheetName]["B13"].value = ""
             
             self.wb[sheetName]["B14"].value = self.df.loc[i, "sample1"]
-            
-            casaDict = self.get_casa(fileName)
+
+            try:
+                casaDict = self.get_casa(fileName)
+            except Exception as e:
+                print(e)
+                continue
             
             motil = casaDict['motil']
             dense = casaDict['dense']
